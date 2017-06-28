@@ -1,0 +1,67 @@
+#!/usr/bin/env php
+<?php
+
+require
+    dirname(__DIR__) . DIRECTORY_SEPARATOR .
+    'vendor' . DIRECTORY_SEPARATOR .
+    'autoload.php';
+
+use Hoa\Console;
+use Hoa\Router;
+use Hywan\MySQLToPlantUML\Frontend;
+
+function usage()
+{
+    echo 'Usage: ' . $_SERVER['argv'][0], "\n";
+}
+
+// Read the command line.
+$parser = new Console\Parser();
+$parser->parse(Router\Cli::getURI());
+
+// Declare the options.
+$options = new Console\GetOption(
+    [
+        ['database-name', Console\GetOption::REQUIRED_ARGUMENT, 'd'],
+        ['help',          Console\GetOption::NO_ARGUMENT,       'h'],
+        ['help',          Console\GetOption::NO_ARGUMENT,       '?'],
+    ],
+    $parser
+);
+
+// Compute options.
+$databaseName = null;
+
+while (false !== $c = $options->getOption($v)) {
+    switch($c) {
+        case 'd':
+            $databaseName = $v;
+
+            break;
+
+        case 'h':
+        case '?':
+            usage();
+            exit(1);
+    }
+}
+
+if (empty($databaseName)) {
+    echo 'The database name is required.', "\n\n";
+
+    usage();
+
+    exit(2);
+}
+
+$reader = new Frontend\Reader();
+
+foreach ($reader->read($databaseName) as $table) {
+    var_dump($table);
+
+    foreach ($table->rows() as $row) {
+        var_dump($row);
+    }
+
+    exit;
+}

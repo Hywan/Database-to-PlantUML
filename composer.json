@@ -1,0 +1,26 @@
+{
+    "name"       : "hywan/mysql-to-plantumml",
+    "description": "Extract MySQL table information into a PlantUML description.",
+    "type"       : "library",
+    "homepage"   : "https://github.com/Hywan/MySQL-to-PlantUML",
+    "license"    : "BSD-3-Clause",
+    "authors"    : [
+        {
+            "name" : "Ivan Enderlin",
+            "email": "ivan.enderlin@hoa-project.net"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/Hywan/MySQL-to-PlantUML"
+    },
+    "require": {
+        "hoa/console" : "~3.0",
+        "hoa/database": "~0.17",
+        "hoa/router"  : "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hywan\\MySQLToPlantUML\\": "src/"
+        }
+    }
+}
