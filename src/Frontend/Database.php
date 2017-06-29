@@ -6,9 +6,10 @@ namespace Hywan\DatabaseToPlantUML\Frontend;
 
 use Hoa\Database\Dal;
 use Hoa\Database\DalStatement;
+use Hoa\Visitor;
 use PDO;
 
-class Database
+class Database implements Visitor\Element
 {
     protected $_databaseConnection = null;
     public $name;
@@ -19,7 +20,7 @@ class Database
         $this->name                = $name;
     }
 
-    public function tables()
+    public function tables(): iterable
     {
         $tables =
             $this->_databaseConnection
@@ -49,5 +50,10 @@ class Database
         );
 
         yield from $tables;
+    }
+
+    public function accept(Visitor\Visit $visitor, &$handle = null, $eldnah  = null)
+    {
+        return $visitor->visit($this, $handle, $eldnah);
     }
 }

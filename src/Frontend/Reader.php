@@ -23,8 +23,8 @@ class Reader
         );
     }
 
-    public function read(string $databaseName)
+    public function read(string $databaseName): Database
     {
-        yield from (new Database($this->_databaseConnection, $databaseName))->tables();
+        return new Database($this->_databaseConnection, $databaseName);
     }
 }

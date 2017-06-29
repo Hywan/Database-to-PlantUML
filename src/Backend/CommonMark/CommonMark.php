@@ -39,7 +39,7 @@ class CommonMark implements Visitor\Visit
             $out .= $table->comment;
         }
 
-        $columnNames         = array_keys(get_class_vars(Frontend\Row::class));
+        $columnNames         = array_keys(get_class_vars(Frontend\Column::class));
         $separators          = [];
         $maximumColumnWidths = [];
 
@@ -47,13 +47,13 @@ class CommonMark implements Visitor\Visit
             $maximumColumnWidths[$columnName] = strlen($columnName);
         }
 
-        $rows = [];
+        $columns = [];
 
-        foreach ($table->rows() as $row) {
-            $rows[] = $row;
+        foreach ($table->columns() as $column) {
+            $columns[] = $column;
 
             foreach ($columnNames as $columnName) {
-                $maximumColumnWidths[$columnName] = max($maximumColumnWidths[$columnName], strlen($row->$columnName ?: ''));
+                $maximumColumnWidths[$columnName] = max($maximumColumnWidths[$columnName], strlen($column->$columnName ?: ''));
             }
         }
 
@@ -70,7 +70,7 @@ class CommonMark implements Visitor\Visit
             '|' . sprintf($pattern, ...$columnNames) . "\n" .
             '|' . sprintf($pattern, ...$separators)  . "\n";
 
-        foreach ($rows as $row) {
+        foreach ($columns as $column) {
             $columnValues = array_map(
                 function ($value) {
                     if ('' === $value || null === $value) {
@@ -79,7 +79,7 @@ class CommonMark implements Visitor\Visit
 
                     return '`' . $value . '`';
                 },
-                array_values(get_object_vars($row))
+                array_values(get_object_vars($column))
             );
 
             $out .= '|' . sprintf($pattern, ...$columnValues) . "\n";

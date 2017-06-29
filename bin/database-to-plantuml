@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
 
+declare(strict_types=1);
+
 require
     dirname(__DIR__) . DIRECTORY_SEPARATOR .
     'vendor' . DIRECTORY_SEPARATOR .
@@ -9,6 +11,7 @@ require
 use Hoa\Console;
 use Hoa\Router;
 use Hywan\DatabaseToPlantUML\Frontend;
+use Hywan\DatabaseToPlantUML\Backend;
 
 function usage()
 {
@@ -54,14 +57,7 @@ if (empty($databaseName)) {
     exit(2);
 }
 
-$reader = new Frontend\Reader();
+$reader  = new Frontend\Reader();
+$backend = new Backend\PlantUML\PlantUML();
 
-foreach ($reader->read($databaseName) as $table) {
-    var_dump($table);
-
-    foreach ($table->rows() as $row) {
-        var_dump($row);
-    }
-
-    exit;
-}
+echo $backend->visit($reader->read($databaseName));
