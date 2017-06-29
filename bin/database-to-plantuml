@@ -26,6 +26,7 @@ $parser->parse(Router\Cli::getURI());
 $options = new Console\GetOption(
     [
         ['database-name', Console\GetOption::REQUIRED_ARGUMENT, 'd'],
+        ['backend',       Console\GetOption::REQUIRED_ARGUMENT, 'b'],
         ['help',          Console\GetOption::NO_ARGUMENT,       'h'],
         ['help',          Console\GetOption::NO_ARGUMENT,       '?'],
     ],
@@ -34,11 +35,34 @@ $options = new Console\GetOption(
 
 // Compute options.
 $databaseName = null;
+$backendName  = Backend\PlantUML::class;
 
 while (false !== $c = $options->getOption($v)) {
     switch($c) {
         case 'd':
             $databaseName = $v;
+
+            break;
+
+        case 'b':
+            $v = strtolower($v);
+
+            switch ($v) {
+                case 'commonmark':
+                    $backendName = Backend\CommonMark::class;
+
+                    break;
+
+                case 'plantuml':
+                    $backendName = Backend\PlantUML::class;
+
+                    break;
+
+                default:
+                    throw new RuntimeException(
+                        'Backend ' . $v . ' is invalid. Choose between `commonmark` or `plantuml`.'
+                    );
+            }
 
             break;
 
@@ -58,6 +82,6 @@ if (empty($databaseName)) {
 }
 
 $reader  = new Frontend\Reader();
-$backend = new Backend\PlantUML\PlantUML();
+$backend = new $backendName();
 
 echo $backend->visit($reader->read($databaseName));

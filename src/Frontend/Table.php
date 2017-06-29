@@ -15,7 +15,7 @@ class Table implements Visitor\Element
 
     public $databaseName;
     public $name;
-    public $engine = null;
+    public $engine  = null;
     public $comment = '';
 
     public function __construct(Dal $databaseConnection)

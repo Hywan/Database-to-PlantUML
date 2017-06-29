@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hywan\DatabaseToPlantUML\Backend\CommonMark;
+namespace Hywan\DatabaseToPlantUML\Backend;
 
 use Hywan\DatabaseToPlantUML\Frontend;
 use Hoa\Visitor;
