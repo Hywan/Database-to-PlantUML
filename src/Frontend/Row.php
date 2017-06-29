@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hywan\MySQLToPlantUML\Frontend;
+namespace Hywan\DatabaseToPlantUML\Frontend;
 
 class Row
 {

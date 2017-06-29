@@ -8,7 +8,7 @@ require
 
 use Hoa\Console;
 use Hoa\Router;
-use Hywan\MySQLToPlantUML\Frontend;
+use Hywan\DatabaseToPlantUML\Frontend;
 
 function usage()
 {

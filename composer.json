@@ -1,8 +1,8 @@
 {
-    "name"       : "hywan/mysql-to-plantumml",
-    "description": "Extract MySQL table information into a PlantUML description.",
+    "name"       : "hywan/database-to-plantumml",
+    "description": "Extract database table information into a PlantUML description.",
     "type"       : "library",
-    "homepage"   : "https://github.com/Hywan/MySQL-to-PlantUML",
+    "homepage"   : "https://github.com/Hywan/Database-to-PlantUML",
     "license"    : "BSD-3-Clause",
     "authors"    : [
         {
@@ -11,7 +11,7 @@
         }
     ],
     "support": {
-        "source": "https://github.com/Hywan/MySQL-to-PlantUML"
+        "source": "https://github.com/Hywan/Database-to-PlantUML"
     },
     "require": {
         "hoa/console" : "~3.0",
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Hywan\\MySQLToPlantUML\\": "src/"
+            "Hywan\\DatabaseToPlantUML\\": "src/"
         }
     }
 }

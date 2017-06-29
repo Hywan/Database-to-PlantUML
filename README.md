@@ -1,1 +1,1 @@
-# MySQL to PlantUML
+# Database to PlantUML
