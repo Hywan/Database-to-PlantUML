@@ -111,7 +111,21 @@ if (empty($databaseName)) {
     exit(2);
 }
 
-$reader  = new Frontend\Reader($databaseDsn, $databaseUser, $databasePassword);
-$backend = new $backendName();
+try {
+    $reader  = new Frontend\Reader($databaseDsn, $databaseUser, $databasePassword);
+    $backend = new $backendName();
 
-echo $backend->visit($reader->read($databaseName));
+    echo $backend->visit($reader->read($databaseName));
+} catch (Exception $e) {
+    ob_start();
+
+    Console\Cursor::colorize('foreground(white) background(red)');
+    echo $e->getMessage(), "\n";
+    Console\Cursor::colorize('normal');
+    $content = ob_get_contents();
+
+    ob_end_clean();
+
+    file_put_contents('php://stderr', $content);
+    exit(2);
+}
