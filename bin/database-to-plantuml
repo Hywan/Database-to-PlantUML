@@ -25,21 +25,42 @@ $parser->parse(Router\Cli::getURI());
 // Declare the options.
 $options = new Console\GetOption(
     [
-        ['database-name', Console\GetOption::REQUIRED_ARGUMENT, 'd'],
-        ['backend',       Console\GetOption::REQUIRED_ARGUMENT, 'b'],
-        ['help',          Console\GetOption::NO_ARGUMENT,       'h'],
-        ['help',          Console\GetOption::NO_ARGUMENT,       '?'],
+        ['database-dsn',      Console\GetOption::REQUIRED_ARGUMENT, 'd'],
+        ['database-user',     Console\GetOption::REQUIRED_ARGUMENT, 'u'],
+        ['database-password', Console\GetOption::REQUIRED_ARGUMENT, 'p'],
+        ['database-name',     Console\GetOption::REQUIRED_ARGUMENT, 's'],
+        ['backend',           Console\GetOption::REQUIRED_ARGUMENT, 'b'],
+        ['help',              Console\GetOption::NO_ARGUMENT,       'h'],
+        ['help',              Console\GetOption::NO_ARGUMENT,       '?'],
     ],
     $parser
 );
 
 // Compute options.
-$databaseName = null;
-$backendName  = Backend\PlantUML::class;
+$databaseDsn      = 'mysql:host=localhost';
+$databaseUser     = 'root';
+$databasePassword = '';
+$databaseName     = null;
+$backendName      = Backend\PlantUML::class;
 
 while (false !== $c = $options->getOption($v)) {
     switch($c) {
         case 'd':
+            $databaseDsn = $v;
+
+            break;
+
+        case 'u':
+            $databaseUser = $v;
+
+            break;
+
+        case 'p':
+            $databasePassword = $v;
+
+            break;
+
+        case 's':
             $databaseName = $v;
 
             break;
@@ -81,7 +102,7 @@ if (empty($databaseName)) {
     exit(2);
 }
 
-$reader  = new Frontend\Reader();
+$reader  = new Frontend\Reader($databaseDsn, $databaseUser, $databasePassword);
 $backend = new $backendName();
 
 echo $backend->visit($reader->read($databaseName));

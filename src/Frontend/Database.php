@@ -52,7 +52,7 @@ class Database implements Visitor\Element
         yield from $tables;
     }
 
-    public function accept(Visitor\Visit $visitor, &$handle = null, $eldnah  = null)
+    public function accept(Visitor\Visit $visitor, &$handle = null, $eldnah = null)
     {
         return $visitor->visit($this, $handle, $eldnah);
     }

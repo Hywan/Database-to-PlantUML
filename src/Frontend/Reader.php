@@ -12,14 +12,14 @@ class Reader
 {
     protected $_databaseConnection = null;
 
-    public function __construct()
+    public function __construct(string $dsn, string $user, string $password)
     {
         $this->_databaseConnection = Dal::getInstance(
             'main',
             'pdo',
-            'mysql:host=localhost',
-            'root',
-            ''
+            $dsn,
+            $user,
+            $password
         );
     }
 

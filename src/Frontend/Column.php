@@ -18,7 +18,7 @@ class Column implements Visitor\Element
     public $referencedTableName  = null;
     public $referencedColumnName = null;
 
-    public function accept(Visitor\Visit $visitor, &$handle = null, $eldnah  = null)
+    public function accept(Visitor\Visit $visitor, &$handle = null, $eldnah = null)
     {
         return $visitor->visit($this, $handle, $eldnah);
     }
