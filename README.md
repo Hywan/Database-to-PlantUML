@@ -2,7 +2,20 @@
 
 This utility renders a graphical 2D visualisation of a database.
 
-Currently, the only frontend is MySQL. There are 2 backends: `commonmark` and `plantuml`.
+Currently, the only frontend is MySQL. There are 2 backends:
+`commonmark` and `plantuml`. The `plantuml` backend allows to generate
+visualisation into the following formats:
+
+  * PNG,
+  * SVG,
+  * EPS,
+  * PDF,
+  * VDX,
+  * XMI,
+  * HTML,
+  * TXT,
+  * UTXT,
+  * LaTeX.
 
 # Installation
 
