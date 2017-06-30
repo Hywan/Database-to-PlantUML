@@ -24,9 +24,15 @@ class PlantUML implements Visitor\Visit
     {
         $out =
             '@startuml' . "\n\n" .
-            '!define table(x) class x << (T,#FFAAAA) >>' . "\n" .
+            '!define table(x) class x << (T,#ffebf3) >>' . "\n" .
             'hide methods' . "\n" .
-            'hide stereotypes' . "\n\n";
+            'hide stereotypes' . "\n" .
+            'skinparam classFontColor #3b0018' . "\n" .
+            'skinparam classArrowColor #ff0066' . "\n" .
+            'skinparam classBorderColor #ff0066' . "\n" .
+            'skinparam classBackgroundColor ##f6f4ee' . "\n" .
+            'skinparam shadowing false' . "\n" .
+            "\n";
 
         foreach ($database->tables() as $table) {
             $out .= $table->accept($this, $handle, $eldnah) . "\n";
