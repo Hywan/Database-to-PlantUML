@@ -4,7 +4,7 @@ This utility renders a graphical 2D visualisation of a database.
 
 Currently, the only frontend is MySQL. There are 2 backends:
 `commonmark` and `plantuml`. The `plantuml` backend allows to generate
-visualisation into the following formats:
+visualisations into the following formats:
 
   * PNG,
   * SVG,
@@ -25,7 +25,7 @@ With [Composer](https://getcomposer.org/), simply run the following command:
 $ composer install
 ```
 
-If you would like to use as a dependency of your project, then:
+If you would like to use it as a dependency of your project, then:
 
 ```sh
 $ composer require hywan/database-to-plantuml
