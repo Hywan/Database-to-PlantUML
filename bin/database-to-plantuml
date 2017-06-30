@@ -15,7 +15,16 @@ use Hywan\DatabaseToPlantUML\Backend;
 
 function usage()
 {
-    echo 'Usage: ' . $_SERVER['argv'][0], "\n";
+    echo
+        'Usage   : ' . $_SERVER['argv'][0], "\n\n" .
+        'Options :' . "\n" .
+        '  -d, --database-dsn=      : Database DSN, default is `mysql:host=localhost` (optional).' . "\n" .
+        '  -u, --database-user=     : Database username, default is `root` (optional).' . "\n" .
+        '  -p, --database-password= : Database password, default is `` (optional).' . "\n" .
+        '  -s, --database-schema=   : Database schema, i.e. database name (required).' . "\n" .
+        '  -b, --backend=           : Rendering backend, default is `plantuml` (optional).' . "\n" .
+        '  -h, --help               : This help.' . "\n" .
+        '  -?, --help               : This help.' . "\n";
 }
 
 // Read the command line.
