@@ -1,5 +1,5 @@
 {
-    "name"       : "hywan/database-to-plantumml",
+    "name"       : "hywan/database-to-plantuml",
     "description": "Extract database table information into a PlantUML description.",
     "type"       : "library",
     "homepage"   : "https://github.com/Hywan/Database-to-PlantUML",
