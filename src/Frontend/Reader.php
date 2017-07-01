@@ -16,7 +16,7 @@ class Reader
     {
         $this->_databaseConnection = Dal::getInstance(
             'main',
-            'Pdo',
+            Dal::PDO,
             $dsn,
             $user,
             $password
