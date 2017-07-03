@@ -72,7 +72,7 @@ class PlantUML implements Visitor\Visit
             if (null !== $column->referencedTableName &&
                 null !== $column->referencedColumnName) {
                 $connections .=
-                    $column->referencedTableName . ' *-- ' . $table->name .
+                    $column->referencedTableName . ' <-- ' . $table->name .
                     ' : on ' . $column->name . ' = ' . $column->referencedColumnName . "\n";
             }
         }
