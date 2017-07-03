@@ -43,7 +43,7 @@ the visualisation as a PNG looks like this:
 $ ./bin/database-to-plantuml -s employees | java -jar ./resource/plantuml.jar -verbose -pipe > output.png
 ```
 
-![Example](https://cldup.com/KJOGt3Tev9.png)
+![Example](https://cldup.com/Cgn7bqdEz5.png)
 
 # License
 
