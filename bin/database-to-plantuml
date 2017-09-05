@@ -119,6 +119,11 @@ if (0 !== preg_match('/^(?<type>[^:]+):/', $databaseDsn, $dsnType)) {
 
             break;
 
+        case 'pgsql':
+            $frontendName = Frontend\PgSQL\Reader::class;
+
+            break;
+
         default:
             throw new RuntimeException(
                 'Unfortunately, the DSN type `' . $dsnType['type'] .
