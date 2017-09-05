@@ -6,7 +6,7 @@ namespace Hywan\DatabaseToPlantUML\Frontend;
 
 use Hoa\Visitor;
 
-class Column implements Visitor\Element
+abstract class Column implements Visitor\Element
 {
     const PRIMARY = 'PRIMARY';
 

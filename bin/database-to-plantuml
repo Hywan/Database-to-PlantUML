@@ -50,6 +50,7 @@ $databaseDsn      = 'mysql:host=localhost';
 $databaseUser     = 'root';
 $databasePassword = '';
 $databaseName     = null;
+$frontendName     = Frontend\MySQL\Reader::class;
 $backendName      = Backend\PlantUML::class;
 
 while (false !== $c = $options->getOption($v)) {
@@ -111,8 +112,27 @@ if (empty($databaseName)) {
     exit(2);
 }
 
+if (0 !== preg_match('/^(?<type>[^:]+):/', $databaseDsn, $dsnType)) {
+    switch ($dsnType['type']) {
+        case 'mysql':
+            $frontendName = Frontend\MySQL\Reader::class;
+
+            break;
+
+        default:
+            throw new RuntimeException(
+                'Unfortunately, the DSN type `' . $dsnType['type'] .
+                '` is not implemented :-(!'
+            );
+    }
+} else {
+    throw new RuntimeException(
+        'The DSN `' . $dsn . '` seems to be invalid.'
+    );
+}
+
 try {
-    $reader  = new Frontend\Reader($databaseDsn, $databaseUser, $databasePassword);
+    $reader  = new $frontendName($databaseDsn, $databaseUser, $databasePassword);
     $backend = new $backendName();
 
     echo $backend->visit($reader->read($databaseName));

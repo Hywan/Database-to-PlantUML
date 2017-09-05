@@ -8,7 +8,7 @@ use Hoa\Database\Dal;
 use Hoa\Database\DalStatement;
 use PDO;
 
-class Reader
+abstract class Reader
 {
     protected $_databaseConnection = null;
 
@@ -23,8 +23,10 @@ class Reader
         );
     }
 
-    public function read(string $databaseName): Database
+    abstract public function read(string $databaseName): Database;
+
+    public function getDatabaseConnection(): Dal
     {
-        return new Database($this->_databaseConnection, $databaseName);
+        return $this->_databaseConnection;
     }
 }

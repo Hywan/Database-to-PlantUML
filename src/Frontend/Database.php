@@ -7,9 +7,8 @@ namespace Hywan\DatabaseToPlantUML\Frontend;
 use Hoa\Database\Dal;
 use Hoa\Database\DalStatement;
 use Hoa\Visitor;
-use PDO;
 
-class Database implements Visitor\Element
+abstract class Database implements Visitor\Element
 {
     protected $_databaseConnection = null;
     public $name;
@@ -20,36 +19,11 @@ class Database implements Visitor\Element
         $this->name                = $name;
     }
 
-    public function tables(): iterable
+    abstract public function tables(): iterable;
+
+    public function getDatabaseConnection(): Dal
     {
-        $tables =
-            $this->_databaseConnection
-                ->prepare(
-                    'SELECT table_schema AS databaseName, ' .
-                    '       table_name AS name, ' .
-                    '       engine, ' .
-                    '       table_comment AS comment ' .
-                    'FROM   information_schema.tables ' .
-                    'WHERE  table_schema = :database_name',
-                    [
-                        PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL
-                    ]
-                )
-                ->execute([
-                    'database_name' => $this->name
-                ]);
-
-        $tables->setFetchingStyle(
-            DalStatement::FROM_START,
-            DalStatement::FORWARD,
-            DalStatement::AS_CLASS,
-            Table::class,
-            [
-                $this->_databaseConnection
-            ]
-        );
-
-        yield from $tables;
+        return $this->_databaseConnection;
     }
 
     public function accept(Visitor\Visit $visitor, &$handle = null, $eldnah = null)
