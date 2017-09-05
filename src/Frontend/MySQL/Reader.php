@@ -11,6 +11,6 @@ class Reader extends Frontend\Reader
 {
     public function read(string $databaseName): Frontend\Database
     {
-        return new Database($this->_databaseConnection, $databaseName);
+        return new Database($this->getDatabaseConnection(), $databaseName);
     }
 }
