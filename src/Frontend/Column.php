@@ -8,7 +8,7 @@ use Hoa\Visitor;
 
 abstract class Column implements Visitor\Element
 {
-    const PRIMARY = 'PRIMARY';
+    const PRIMARY = '/^PRIMARY$/';
 
     public $name;
     public $defaultValue         = null;

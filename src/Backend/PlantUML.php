@@ -62,7 +62,7 @@ class PlantUML implements Visitor\Visit
         foreach ($columns as $column) {
             $out .= sprintf(
                 '    {field} %s%s%s%s%s' . "\n",
-                $column::PRIMARY === $column->constraintName ? '+' : '',
+                0 !== preg_match($column::PRIMARY, $column->constraintName ?? '') ? '+' : '',
                 $column->name,
                 str_repeat("\t", max(1, $maximumTabulation - (int) (floor(strlen($column->name) / 4)))),
                 $column->isNullable ? '?' : '',
