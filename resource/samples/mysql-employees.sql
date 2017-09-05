@@ -7,8 +7,8 @@ SELECT 'CREATING DATABASE STRUCTURE' as 'INFO';
 DROP TABLE IF EXISTS dept_emp,
                      dept_manager,
                      titles,
-                     salaries, 
-                     employees, 
+                     salaries,
+                     employees,
                      departments;
 
 /*!50503 set default_storage_engine = InnoDB */;
@@ -19,7 +19,7 @@ CREATE TABLE employees (
     birth_date  DATE            NOT NULL,
     first_name  VARCHAR(14)     NOT NULL,
     last_name   VARCHAR(16)     NOT NULL,
-    gender      ENUM ('M','F')  NOT NULL,    
+    gender      ENUM ('M','F')  NOT NULL,
     hire_date   DATE            NOT NULL,
     PRIMARY KEY (emp_no)
 );
@@ -39,7 +39,7 @@ CREATE TABLE dept_manager (
    FOREIGN KEY (emp_no)  REFERENCES employees (emp_no)    ON DELETE CASCADE,
    FOREIGN KEY (dept_no) REFERENCES departments (dept_no) ON DELETE CASCADE,
    PRIMARY KEY (emp_no,dept_no)
-); 
+);
 
 CREATE TABLE dept_emp (
     emp_no      INT             NOT NULL,
@@ -58,8 +58,7 @@ CREATE TABLE titles (
     to_date     DATE,
     FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,title, from_date)
-) 
-; 
+);
 
 CREATE TABLE salaries (
     emp_no      INT             NOT NULL,
@@ -68,8 +67,7 @@ CREATE TABLE salaries (
     to_date     DATE            NOT NULL,
     FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no, from_date)
-) 
-; 
+);
 
 CREATE OR REPLACE VIEW dept_emp_latest_date AS
     SELECT emp_no, MAX(from_date) AS from_date, MAX(to_date) AS to_date

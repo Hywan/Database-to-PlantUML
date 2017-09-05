@@ -9,7 +9,7 @@ CREATE TABLE employees (
     birth_date  DATE            NOT NULL,
     first_name  VARCHAR(14)     NOT NULL,
     last_name   VARCHAR(16)     NOT NULL,
-    gender      gender 		NULL,    
+    gender      gender 		NULL,
     hire_date   DATE            NOT NULL,
     PRIMARY KEY (emp_no)
 );
@@ -29,7 +29,7 @@ CREATE TABLE dept_manager (
    FOREIGN KEY (emp_no)  REFERENCES employees (emp_no)    ON DELETE CASCADE,
    FOREIGN KEY (dept_no) REFERENCES departments (dept_no) ON DELETE CASCADE,
    PRIMARY KEY (emp_no,dept_no)
-); 
+);
 
 CREATE INDEX dept_manager_dept_no_idx ON dept_manager(dept_no);
 
@@ -52,8 +52,7 @@ CREATE TABLE titles (
     to_date     DATE,
     FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
     PRIMARY KEY (emp_no,title, from_date)
-); 
-
+);
 
 CREATE TABLE salaries (
     emp_no      INT             NOT NULL,
