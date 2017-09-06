@@ -14,8 +14,6 @@ class Table extends Frontend\Table
 
     public function columns(): iterable
     {
-        list($databaseName, $tableSchema) = array_merge(explode('.', $this->databaseName), [1 => 'public']);
-
         $columns =
             $this->getDatabaseConnection()
                 ->prepare(
@@ -47,9 +45,9 @@ class Table extends Frontend\Table
                     ]
                 )
                 ->execute([
-                    'database_name' => $databaseName,
+                    'database_name' => $this->databaseName,
                     'table_name'    => $this->name,
-                    'table_schema'  => $tableSchema
+                    'table_schema'  => $this->tableSchema
                 ]);
 
         $columns->setFetchingStyle(
