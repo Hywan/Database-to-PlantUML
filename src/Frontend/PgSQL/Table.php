@@ -43,7 +43,7 @@ class Table extends Frontend\Table
                     'AND       c.table_name = :table_name ' .
                     'AND       c.table_schema = :table_schema',
                     [
-                        PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL
+                        PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY
                     ]
                 )
                 ->execute([

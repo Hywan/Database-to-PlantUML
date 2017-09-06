@@ -23,7 +23,7 @@ class Database extends Frontend\Database
                     'WHERE  table_catalog = :database_name ' .
                     'AND    table_schema = :table_schema',
                     [
-                        PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL
+                        PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY
                     ]
                 )
                 ->execute([
