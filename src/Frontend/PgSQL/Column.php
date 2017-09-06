@@ -9,4 +9,5 @@ use Hywan\DatabaseToPlantUML\Frontend;
 
 class Column extends Frontend\Column
 {
+    const PRIMARY = '/_pkey$/';
 }
