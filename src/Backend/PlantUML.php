@@ -59,17 +59,26 @@ class PlantUML implements Visitor\Visit
 
         $maximumTabulation = 1 + (int) floor($maximumNameLength / 4);
 
-        foreach ($columns as $column) {
-            $out .= sprintf(
-                '    {field} %s%s%s%s%s' . "\n",
-                0 !== preg_match($column::PRIMARY, $column->constraintName ?? '') ? '+' : '',
-                $column->name,
-                str_repeat("\t", max(1, $maximumTabulation - (int) (floor(strlen($column->name) / 4)))),
-                $column->isNullable ? '?' : '',
-                $column->type
-            );
+        $listedColumns = [];
 
-            if (null !== $column->referencedTableName &&
+        foreach ($columns as $column) {
+            $isPrimary = 0 !== preg_match($column::PRIMARY, $column->constraintName ?? '');
+
+            if (false === in_array($column->name, $listedColumns)) {
+                $out .= sprintf(
+                    '    {field} %s%s%s%s%s' . "\n",
+                    $isPrimary ? '+' : '',
+                    $column->name,
+                    str_repeat("\t", max(1, $maximumTabulation - (int) (floor(strlen($column->name) / 4)))),
+                    $column->isNullable ? '?' : '',
+                    $column->type
+                );
+
+                $listedColumns[] = $column->name;
+            }
+
+            if (false === $isPrimary &&
+                null !== $column->referencedTableName &&
                 null !== $column->referencedColumnName) {
                 $connections .=
                     $column->referencedTableName . ' <-- ' . $table->name .
