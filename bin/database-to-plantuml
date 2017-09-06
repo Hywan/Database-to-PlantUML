@@ -21,7 +21,8 @@ function usage()
         '  -d, --database-dsn=      : Database DSN, default is `mysql:host=localhost` (optional).' . "\n" .
         '  -u, --database-user=     : Database username, default is `root` (optional).' . "\n" .
         '  -p, --database-password= : Database password, default is `` (optional).' . "\n" .
-        '  -s, --database-schema=   : Database schema, i.e. database name (required).' . "\n" .
+        '  -s, --database-schema=   : Database name, with database schema if needed separated by a dot, ' .
+        '                             i.e. `name` or `name.schema` (required).' . "\n" .
         '  -b, --backend=           : Rendering backend, default is `plantuml` (optional).' . "\n" .
         '  -h, --help               : This help.' . "\n" .
         '  -?, --help               : This help.' . "\n";

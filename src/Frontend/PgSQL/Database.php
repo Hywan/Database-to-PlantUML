@@ -12,6 +12,8 @@ class Database extends Frontend\Database
 {
     public function tables(): iterable
     {
+        list($databaseName, $tableSchema) = array_merge(explode('.', $this->name), [1 => 'public']);
+
         $tables =
             $this->getDatabaseConnection()
                 ->prepare(
@@ -25,8 +27,8 @@ class Database extends Frontend\Database
                     ]
                 )
                 ->execute([
-                    'database_name' => $this->name,
-                    'table_schema'  => 'public'
+                    'database_name' => $databaseName,
+                    'table_schema'  => $tableSchema
                 ]);
 
         $tables->setFetchingStyle(
