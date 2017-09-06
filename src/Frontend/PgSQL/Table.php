@@ -21,12 +21,12 @@ class Table extends Frontend\Table
                 ->prepare(
                     'SELECT DISTINCT ' .
                     '          c.column_name AS name, ' .
-                    '          c.column_default AS defaultValue, ' .
-                    '          CASE c.is_nullable WHEN \'YES\' THEN 1 ELSE 0 END AS isNullable, ' .
+                    '          c.column_default AS "defaultValue", ' .
+                    '          CASE c.is_nullable WHEN \'YES\' THEN 1 ELSE 0 END AS "isNullable", ' .
                     '          c.data_type AS type, ' .
-                    '          k.constraint_name AS constraintName, ' .
-                    '          cc.table_name AS referencedTableName, ' .
-                    '          cc.column_name AS referencedColumnName ' .
+                    '          k.constraint_name AS "constraintName", ' .
+                    '          cc.table_name AS "referencedTableName", ' .
+                    '          cc.column_name AS "referencedColumnName" ' .
                     'FROM      information_schema.columns AS c ' .
                     'LEFT JOIN information_schema.key_column_usage AS k ' .
                     'ON        k.table_catalog = c.table_catalog ' .

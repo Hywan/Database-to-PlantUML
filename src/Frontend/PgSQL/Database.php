@@ -17,7 +17,7 @@ class Database extends Frontend\Database
         $tables =
             $this->getDatabaseConnection()
                 ->prepare(
-                    'SELECT table_catalog AS databaseName, ' .
+                    'SELECT table_catalog AS "databaseName", ' .
                     '       table_name AS name ' .
                     'FROM   information_schema.tables ' .
                     'WHERE  table_catalog = :database_name ' .
