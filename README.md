@@ -2,9 +2,10 @@
 
 This utility renders a graphical 2D visualisation of a database.
 
-Currently, the only frontend is MySQL. There are 2 backends:
-`commonmark` and `plantuml`. The `plantuml` backend allows to generate
-visualisations into the following formats:
+Currently, the only supported frontends are **PostgreSQL** and
+**MySQL**. There are 2 backends: `commonmark` and `plantuml`. The
+`plantuml` backend allows to generate visualisations into the
+following formats:
 
   * PNG,
   * SVG,
@@ -31,19 +32,42 @@ If you would like to use it as a dependency of your project, then:
 $ composer require hywan/database-to-plantuml
 ```
 
-To use the `plantuml` backend, you can use the JAR in `./resource/plantuml.jar`.
+To use the `plantuml` backend, you can use the JAR in `resource/plantuml.jar`.
 
-# Example
+# Examples with…
 
-Taking
-[the `employee` test database from MySQL](https://github.com/datacharmer/test_db),
-the visualisation as a PNG looks like this:
+## … PostgreSQL
+
+Taking as an example the famous `employees` use case:
 
 ```sh
-$ ./bin/database-to-plantuml -s employees | java -jar ./resource/plantuml.jar -verbose -pipe > output.png
+# Import the schema.
+$ psql -f resource/samples/pgsql-employees.sql postgres
+
+# Generate the visualisation.
+$ bin/database-to-plantuml -d 'pgsql:dbname=employees' -u hywan -s employees | \
+      java -jar resource/plantuml.jar -verbose -pipe > output.png
 ```
 
-![Example](https://cldup.com/Cgn7bqdEz5.png)
+![Output with PostgreSQL](https://cldup.com/UMsPg3WKh0.png)
+
+## … MySQL
+
+With the same `employees` use case:
+
+```sh
+# Import the schema.
+$ mysql -u root < resource/samples/mysql-employees.sql
+
+# Generate the visualisation.
+$ bin/database-to-plantuml -d 'mysql:dbname=employees' -u root -s employees | \
+      java -jar resource/plantuml.jar -verbose -pipe > output.png
+```
+
+![Output with MySQL](https://cldup.com/Cgn7bqdEz5.png)
+
+Note: Outputs differ because the `employees` examples are not exactly
+the same. They are here to illustrate the tool only.
 
 # License
 
