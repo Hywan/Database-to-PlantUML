@@ -14,7 +14,7 @@
         "source": "https://github.com/Hywan/Database-to-PlantUML"
     },
     "require": {
-        "php"         : ">=7.0",
+        "php"         : ">=7.1",
         "hoa/console" : "~3.0",
         "hoa/database": "~0.17",
         "hoa/router"  : "~3.0",
@@ -24,5 +24,6 @@
         "psr-4": {
             "Hywan\\DatabaseToPlantUML\\": "src/"
         }
-    }
+    },
+    "bin": ["bin/database-to-plantuml"]
 }
