@@ -1,3 +1,5 @@
 /vendor
 /composer.lock
 .idea/
+*.puml
+*.iuml

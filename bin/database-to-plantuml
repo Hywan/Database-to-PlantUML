@@ -90,6 +90,11 @@ while (false !== $c = $options->getOption($v)) {
 
                     break;
 
+                case 'plantumlsinglefile':
+                    $backendName = Backend\PlantUMLSingleFile::class;
+
+                    break;
+
                 default:
                     throw new RuntimeException(
                         'Backend ' . $v . ' is invalid. Choose between `commonmark` or `plantuml`.'

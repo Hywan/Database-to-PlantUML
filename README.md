@@ -2,9 +2,14 @@
 
 This utility renders a graphical 2D visualisation of a database.
 
-Currently, the only supported frontends are **PostgreSQL** and
-**MySQL**. There are 2 backends: `commonmark` and `plantuml`. The
-`plantuml` backend allows to generate visualisations into the
+Currently, the only supported frontends are **PostgreSQL** and **MySQL**.
+
+There are these backends:
+* `commonmark`
+* `plantuml`
+* `plantumlsinglefile`
+ 
+The `plantuml` and `plantumlsinglefile` backend allow to generate visualisations into the
 following formats:
 
   * PNG,
@@ -72,3 +77,26 @@ the same. They are here to illustrate the tool only.
 # License
 
 BSD-3-License, but seriously, do what ever you want!
+
+# PlantUMLSingleFile
+
+This will generate separate files for:
+* the definition of a table
+  * filename: `table__[database]__[table].iuml` (include-file)
+* its relations
+  * filename: `relations__[database]__[table]__[referenced_table].iuml` (include-file)
+* complete table definition
+  * filename: `table__[database]__[table].puml`
+
+and then output a puml-definition with includes to all of those table and relation-files.
+
+The idea behind that is that this way it is possible to reuse single table definitions in other contexts.
+e.g. by putting tables into groups
+
+## Usage
+
+
+```sh
+$ bin/database-to-plantuml -d 'mysql:dbname=employees' -u root -s employees -b PlantUMLSingleFile | \
+      java -jar resource/plantuml.jar -verbose -pipe > output.png
+```
