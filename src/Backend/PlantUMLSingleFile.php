@@ -59,7 +59,7 @@ class PlantUMLSingleFile implements Visitor\Visit
         $out = $this->fileBanner . "\n";
 
         foreach ($database->tables() as $table) {
-            $out .= $table->accept($this, $handle, $eldnah) . "\n";
+            $out .= "!include ".$table->accept($this, $handle, $eldnah) . "\n";
         }
 
         $out .= '@enduml';
