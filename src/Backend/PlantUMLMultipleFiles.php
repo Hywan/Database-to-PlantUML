@@ -15,7 +15,7 @@ use Hoa\Visitor;
  *
  * The output is then just a file with lots of includes to all puml-files
  */
-class PlantUMLSingleFile implements Visitor\Visit
+class PlantUMLMultipleFiles implements Visitor\Visit
 {
     /**
      * Stores the database this visitor is visiting so its possible to use this value

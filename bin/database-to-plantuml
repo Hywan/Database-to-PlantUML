@@ -90,8 +90,8 @@ while (false !== $c = $options->getOption($v)) {
 
                     break;
 
-                case 'plantumlsinglefile':
-                    $backendName = Backend\PlantUMLSingleFile::class;
+                case 'plantuml-multiple-files':
+                    $backendName = Backend\PlantUMLMultipleFiles::class;
 
                     break;
 
