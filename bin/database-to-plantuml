@@ -101,6 +101,11 @@ while (false !== $c = $options->getOption($v)) {
 
                     break;
 
+                case 'plantuml-multiple-files':
+                    $backendName = Backend\PlantUMLMultipleFiles::class;
+
+                    break;
+
                 default:
                     throw new RuntimeException(
                         'Backend ' . $v . ' is invalid. Choose between `commonmark` or `plantuml`.'
