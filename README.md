@@ -69,6 +69,19 @@ $ bin/database-to-plantuml -d 'mysql:dbname=employees' -u root -s employees | \
 Note: Outputs differ because the `employees` examples are not exactly
 the same. They are here to illustrate the tool only.
 
+# Errors ...
+
+Sometimes things happen...
+
+## ... could not find driver
+
+Check if php has the good PDO module installed :
+```bash
+$ php -m |grep -i pdo
+PDO
+pdo_mysql
+```
+
 # License
 
 BSD-3-License, but seriously, do what ever you want!
